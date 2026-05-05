@@ -1,48 +1,100 @@
-# Fuel Efficiency Predictor Machine Learning on Maritime Data
-End-to-end ML pipeline for predicting ship fuel usage across Nigerian sea routes. Features data cleaning, label encoding, train-test split, and multi-model evaluation with Decision Tree as best performer.
+# 🚢 Ship Fuel Efficiency Dataset
 
+> A machine learning dataset capturing 1,440 voyage-level records from ships
+> operating across Nigerian maritime routes — built for fuel consumption prediction.
 
-**Overview**
-The Ship Fuel Efficiency dataset is a structured tabular dataset containing 1,440 voyage-level records collected from ships operating across Nigerian maritime routes. It captures real-world operational, environmental, and mechanical data for multiple vessel types across all 12 months of the year. The primary objective of this dataset is to enable predictive modeling of fuel consumption, making it valuable for fleet management optimization, cost reduction analysis, and environmental impact studies.
+---
 
+## 📊 Dataset at a Glance
 
-**Dataset Dimensions**
-Rows: 1,440 | Columns: 10 | Missing Values: None | Duplicates: None
+| Property | Value |
+|---|---|
+| Total Records | 1,440 |
+| Total Features | 10 |
+| Missing Values | None |
+| Duplicates | None |
+| Target Variable | `fuel_consumption` |
+| Task Type | Regression |
 
-**Features Breakdown**
-Ship Identifiers
+---
 
-ship_id — A unique alphanumeric code assigned to each vessel (e.g., NG001, NG120). Ranges across 120 ships, each recorded across multiple months and routes.
-ship_type — The operational classification of the vessel. Includes types such as Oil Service Boat and Fishing Trawler, each with distinctly different fuel consumption profiles.
+## 📁 Features Breakdown
 
-Route & Time Information
+### 🔹 Identifiers
+| Column | Type | Description |
+|---|---|---|
+| `ship_id` | string | Unique vessel code (e.g., NG001, NG120) |
+| `ship_type` | string | Vessel class (Oil Service Boat, Fishing Trawler, etc.) |
 
-route_id — The named shipping route for the voyage, covering Nigerian waterways such as Warri-Bonny, Port Harcourt-Lagos, and Lagos-Apapa. Route directly influences distance and sea conditions.
-month — The calendar month of the voyage (January through December), capturing seasonal patterns that affect weather and operational decisions.
+### 🔹 Route & Time
+| Column | Type | Description |
+|---|---|---|
+| `route_id` | string | Named shipping route (e.g., Warri-Bonny, Lagos-Apapa) |
+| `month` | string | Calendar month of the voyage |
 
-Operational Metrics
+### 🔹 Operational Metrics
+| Column | Type | Description |
+|---|---|---|
+| `distance` | float64 | Distance traveled in kilometers |
+| `fuel_type` | string | Fuel used — HFO or Diesel |
+| `engine_efficiency` | float64 | Engine efficiency as a percentage |
+| `weather_conditions` | string | Sea conditions — Calm, Moderate, or Stormy |
 
-distance — The total distance traveled in kilometers for that voyage. Ranges from 20.08 km to 498.55 km, with a mean of 151.75 km. This is one of the strongest drivers of fuel consumption.
-fuel_type — The type of fuel used, either HFO (Heavy Fuel Oil) or Diesel. HFO is cheaper but heavier and more polluting; Diesel is cleaner but more expensive.
-engine_efficiency — The percentage efficiency of the ship's engine during the voyage, ranging from 70.01% to 94.98%. Lower efficiency means the engine burns more fuel to produce the same output.
-weather_conditions — Categorical description of sea and weather conditions during the voyage: Calm, Moderate, or Stormy. Stormy conditions significantly increase fuel burn due to wave resistance and engine strain.
+### 🎯 Target Variable
+| Column | Type | Description |
+|---|---|---|
+| `fuel_consumption` | float64 | Total fuel consumed in liters |
 
-Target Variable
+### ❌ Dropped Column
+| Column | Reason |
+|---|---|
+| `CO2_emissions` | Removed — mathematically derived from target (data leakage) |
 
-fuel_consumption — The total fuel consumed during the voyage in liters. This is the prediction target. Values range from 237.88 to 24,648.52 liters, with a mean of 4,844.25 and a high standard deviation of 4,892.35 — reflecting the wide variability driven by ship type, distance, and weather.
+---
 
-Dropped Column
+## 📈 Key Statistics
 
-CO2_emissions — Carbon dioxide output calculated directly from fuel consumption using a fixed emission factor. This column was removed during preprocessing to prevent data leakage, as it is mathematically derived from the target variable and would give the model an unfair informational advantage.
+| Feature | Min | Mean | Max |
+|---|---|---|---|
+| Distance (km) | 20.08 | 151.75 | 498.55 |
+| Fuel Consumption (L) | 237.88 | 4,844.25 | 24,648.52 |
+| Engine Efficiency (%) | 70.01 | 82.58 | 94.98 |
 
+---
 
-Key Statistical Highlights
-FeatureMinMeanMaxDistance (km)20.08151.75498.55Fuel Consumption (L)237.884,844.2524,648.52Engine Efficiency (%)70.0182.5894.98
+## 🤖 Models Evaluated
 
-Why This Dataset is Valuable
+| Model | Test R² | MAE |
+|---|---|---|
+| Linear Regression | 0.9134 | 1,159.48 |
+| Decision Tree | **0.9271** | **804.33** |
+| Lasso Regression | 0.9134 | 1,159.45 |
+| Ridge Regression | 0.9134 | 1,159.48 |
 
-Real-world domain — Maritime shipping is a major global industry and fuel costs represent up to 60% of operating expenses for ship operators.
-Multi-factor complexity — Fuel consumption is influenced by a combination of distance, vessel type, weather, fuel type, and engine health, making it a rich regression problem.
-Clean & complete — Zero nulls and zero duplicates make it immediately usable without heavy preprocessing.
-Balanced size — At 1,440 records, it is large enough to train generalizable models yet small enough for rapid experimentation.
-Practical applications — Predictions from models trained on this data can directly feed into route optimization systems, maintenance scheduling, and carbon footprint tracking tools.
+> ✅ **Best Model: Decision Tree Regressor** — highest R² and lowest MAE,
+> thanks to its ability to capture non-linear relationships between
+> distance, weather, ship type, and fuel usage.
+
+---
+
+## 🛠️ Tech Stack
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![Scikit-Learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
+
+---
+
+## 💡 Why This Dataset?
+
+- 🌍 **Real-world domain** — Fuel costs represent up to 60% of ship operating expenses
+- 🔀 **Multi-factor complexity** — Distance, weather, engine health, and vessel type all interact
+- ✅ **Clean & complete** — Zero nulls, zero duplicates, ready to use
+- 📦 **Balanced size** — Large enough to generalize, small enough to iterate fast
+- 🎯 **Practical impact** — Predictions can feed route optimization and carbon tracking systems
+
+---
+
+## 🚀 Getting Started
+
+```python
