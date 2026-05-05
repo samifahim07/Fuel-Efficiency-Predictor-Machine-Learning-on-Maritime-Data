@@ -95,6 +95,20 @@
 
 ---
 
-## 🚀 Getting Started
+## 📂 Project Structure
+
+```
+ship-fuel-efficiency/
+│
+├── ship_fuel_efficiency.csv   # Raw dataset
+├── ship_fuel.ipynb            # Full analysis notebook
+└── README.md                  # This file
+```
 
 ```python
+
+
+_**For a more detailed explanation of this project, please review the accompanying DOCX document.**_
+[📄 Comparative_ML_Study](https://github.com/samifahim07/Surviving-the-Algorithm-A-Comparative-ML-Study-of-Classification-Models-Using-Titanic-Dataset/blob/0c0151e032af56f05ef0b2c9ecf9a2b3792ac995/Comparative_ML_Study.docx)
+
+## ⭐ Give a star if you like this project!
