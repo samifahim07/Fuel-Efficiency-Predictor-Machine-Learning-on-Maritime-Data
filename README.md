@@ -112,6 +112,4 @@ ship-fuel-efficiency/
 
 **For a more detailed explanation of this project, please review the accompanying DOCX document.**
 
-[📄 Comparative_ML_Study] -> ship_fuel_analysis.docx)
-
 ## ⭐ Give a star if you like this project!
